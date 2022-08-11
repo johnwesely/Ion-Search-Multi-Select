@@ -1,0 +1,23 @@
+{
+  "name": "ion-search-multi-select",
+  "version": "1.0.0",
+  "description": "Searchable Multi-Select built using Ionic Components",
+  "main": "index.js",
+  "scripts": {
+    "build": "bili --name index --plugin vue --vue.css false"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "author": "John Wesely",
+  "license": "ISC",
+  "dependencies": {
+    "@ionic/vue": "^6.2.2",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "bili": "^5.0.5",
+    "rollup-plugin-vue": "^6.0.0",
+    "vue-template-compiler": "^2.7.8"
+  }
+}
