@@ -21,6 +21,7 @@ import { defineComponent, toRef, ref } from "vue";
 import { modalController, IonButton } from '@ionic/vue';
 import { closeCircleOutline } from "ionicons/icons";
 import IonSearchMultiSelectModal from './IonSearchMultiSelectModal.vue';
+import { useModelWrapper } from "./modelWrapper";
 
 export default defineComponent({
     name: 'IonSearchMultiSelect',
@@ -29,12 +30,12 @@ export default defineComponent({
     },
     props: {
         optionsProp: Array,
-        selectedOptionsProp: Array,
         fieldNameProp: String,
+        modelValue: Array,
     },
-    setup(props: any) {
+    setup(props: any, { emit }) {
         const options = toRef(props, 'optionsProp').value;
-        let selectedOptions = ref(props.selectedOptionsProp);
+        let selectedOptions = useModelWrapper(props, emit, 'modelValue');
         const fieldName = toRef(props, 'fieldNameProp').value;
 
         const openModal = async () => {

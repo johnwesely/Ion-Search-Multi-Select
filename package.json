@@ -1,6 +1,6 @@
 {
   "name": "ion-search-multi-select",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Searchable Multi-Select built using Ionic Components",
   "main": "index.js",
   "scripts": {
