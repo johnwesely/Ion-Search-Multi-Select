@@ -26,11 +26,11 @@
                 <!-- <IonIcon :icon="closeCircleOutline" style="position: absolute; top: 1rem; right: 1rem"/> -->
             </div>
         </div>
-        <ion-button color="secondary" @click="toggleModal" :size="span ? 'small' : ''">
+        <ion-button color="secondary" @click="openModal" :size="span ? 'small' : ''">
             Add More
         </ion-button>
     </div>
-    <ion-modal :is-open="isOpen" @did-dismiss="toggleModal">
+    <ion-modal :is-open="isOpen" @did-dismiss="closeModal">
         <ion-header>
             <ion-toolbar>
                 <ion-title>
@@ -54,10 +54,14 @@
                 <ion-label>
                     Search
                 </ion-label>
-                <ion-input v-model="searchQuery" placeholder="Search"></ion-input>
+                <ion-input 
+                    v-model="searchQuery"
+                    placeholder="Search"
+                    @keyup="filterOptions()"
+                ></ion-input>
             </ion-item>
             <ion-item>
-                <ion-button color="secondary" @click="toggleModal()">Submit</ion-button>
+                <ion-button color="secondary" @click="closeModal">Submit</ion-button>
             </ion-item>
             <ion-item
                 v-for="option of filteredOptions" 
@@ -113,9 +117,14 @@ export default defineComponent({
         const span = toRef(props, 'spanProp').value ?? false;
         let isOpen = ref(false);
         let searchQuery = ref('');
+        let filteredOptions = ref(options);
 
-        const toggleModal = () => {
-            isOpen.value = ! isOpen.value;
+        const closeModal = () => {
+            isOpen.value = false;
+        }
+
+        const openModal = () => {
+            isOpen.value = true;
         }
 
         const searchOptions = (options, value) => {
@@ -127,9 +136,7 @@ export default defineComponent({
         }
 
         const filterOptions = () => {
-            let filteredOptions = searchOptions(options, searchQuery.value);
-
-            return filteredOptions;
+            filteredOptions.value = searchOptions(options, searchQuery.value);
         }
 
         const removeOption = (optionToRemove) => {
@@ -153,19 +160,19 @@ export default defineComponent({
         }
 
         return {
-            filteredOptions: computed(() => {
-                return filterOptions();
-            }),
+            searchQuery,
+            filteredOptions,
             options,
             selectedOptions,
             fieldName,
             span,
-            searchQuery,
             isOpen,
 
-            toggleModal,
+            openModal,
+            closeModal,
             removeOption,
             toggleSelected,
+            filterOptions,
 
             closeCircleOutline
         };

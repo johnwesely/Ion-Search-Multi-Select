@@ -11,7 +11,7 @@ export default defineConfig({
       filename: (format) => `${format}.js`,
     },
     rollupOptions: {
-      external: ["vue", "vue-router"],
+      external: ["vue", "vue-router", "@ionic/vue"],
       output: {
         globals: {
           vue: "Vue",
