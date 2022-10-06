@@ -1,7 +1,7 @@
 {
   "name": "ion-search-multi-select",
   "private": false, 
-  "version": "3.1.0",
+  "version": "3.1.1",
   "type": "module",
   "main": "./dist/ion-search-multi-select.umd.cjs",
   "module": "./dist/ion-search-multi-select.js",
